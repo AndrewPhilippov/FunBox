@@ -416,24 +416,47 @@ a:hover {
     z-index: -1;
 }
 
-.page-title {
+.bg::before {
+    content: '';
     position: absolute;
-    top: 20px;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-            transform: translateX(-50%);
-    z-index: 1;
-    color: #fff;
-    font-family: 'exo_2.0thin', sans-serif;
-    font-weight: 100;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 33vh;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, .8), transparent)
 }
 
-.card-holder {
+.bg::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 33vh;
+    background-image: linear-gradient(to top, rgba(0, 0, 0, .8), transparent)
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
     position: absolute;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
+}
+
+.page-title {
+    display: block;
+    z-index: 1;
+    color: #fff;
+    font-family: 'exo_2.0thin', sans-serif;
+    font-weight: 100;
+    font-size: 36px;
+    text-align: center;
+}
+
+.card-holder {
     margin-left: 40px;
     display: flex;
 }
@@ -470,6 +493,7 @@ a:hover {
         );
     cursor: pointer;
     margin-right: 80px;
+    margin-top: 24px;
 }
 
 .card::before {
