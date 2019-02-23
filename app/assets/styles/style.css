@@ -1,0 +1,299 @@
+@import 'normalize.css';
+
+@font-face {
+    font-family: 'exo_2.0thin';
+    src: url('fonts/exo2.0-thin.woff2') format('woff2'),
+        url('fonts/exo2.0-thin.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+    font-family: "Trebuchet MS";
+
+    --secondary-grey: #666666;
+    --is-disabled: #b3b3b3;
+    --is-active: #D91667;
+    --is-active--hover: #E52E7A;
+    --default-blue: #1698d9;
+    --default-blue--hover: #2EA8E6;
+    --pechalka: #ffff66;
+}
+
+
+*,
+*:before,
+*:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    color: var(--default-blue);
+    text-decoration: none;
+    position: relative;
+    transition: color .1s;
+}
+
+a:hover {
+    color: var(--default-blue--hover);
+}
+
+.btn--bold {
+    font-weight: 900;
+}
+
+
+.btn--underline::after {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 1px;
+    /* To make 6 strokes under the link I decided to use repeating linear gradient.*/
+    background-image: repeating-linear-gradient(90deg,
+        var(--default-blue),
+        var(--default-blue) 4px,
+        transparent 4px,
+        transparent 6px);
+}
+
+
+
+.bg {
+    background-image: url('../images/Pattern.png');
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    z-index: -1;
+}
+
+.page-title {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    color: #fff;
+    font-family: 'exo_2.0thin', sans-serif;
+    font-weight: 100;
+}
+
+.card-holder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-left: 40px;
+    display: flex;
+}
+
+.card {
+    width: 320px;
+    height: 480px;
+    background-color: #fff;
+    background-color: #f2f2f2;
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    clip-path: polygon(0% 43px,
+        /* top left */
+        43px 0%,
+        /* top right */
+        100% 0%,
+        /* bottom right */
+        100% 100%,
+        /* bottom left */
+        0 100%
+        /* bottom left */
+        );
+    cursor: pointer;
+    margin-right: 80px;
+}
+
+.card::before {
+    position: absolute;
+    top: -16px;
+    left: 0px;
+    content: '';
+    /* Длина по рассчетам примерно 60.81px, но 60 вписалась четко */
+    height: 60px;
+    background-color: var(--default-blue);
+    width: 4px;
+    transform-origin: 100% 100%;
+    transform: rotate(45deg);
+    transition: background-color .1s ease-out;
+}
+
+.card:hover::before {
+    background-color: var(--default-blue--hover);
+}
+
+.card:hover::after {
+    border: 5px solid var(--default-blue--hover)
+}
+
+.card:hover .card-weight-ellipse {
+    background-color: var(--default-blue--hover);
+}
+
+.card-title {
+    font-size: 48px;
+    margin-top: 4px;
+}
+
+.card-subtitle {
+    font-size: 24px;
+}
+
+.card-subtitle--upper {
+    font-size: 16px;
+    margin-top: 25px;
+    color: var(--secondary-grey);
+}
+
+.card-description {
+    margin-top: 15px;
+    color: var(--secondary-grey);
+}
+
+.card::after {
+    content: '';
+    width: 320px;
+    height: 480px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    border: 5px solid var(--default-blue);
+    border-radius: 5px;
+    transition: border-color .1s ease-out;
+}
+
+/* If .active - change color of bg-clr && stroke */
+.card.active::before {
+    background-color: var(--is-active);
+}
+
+.card.active::after {
+    border-color: var(--is-active);
+}
+
+.card.active .card-weight-ellipse {
+    background-color: var(--is-active);
+}
+
+/* On Hover */
+.card.active:hover::before {
+    background-color: var(--is-active--hover);
+}
+
+.card.active:hover::after {
+    border: 5px solid var(--is-active--hover)
+}
+
+.card.active:hover .card-weight-ellipse {
+    background-color: var(--is-active--hover);
+}
+
+/* If .disabled - change color of bg-clr && stroke */
+.card.disabled {
+    cursor: no-drop;
+}
+
+.card.disabled::before {
+    background-color: var(--is-disabled);
+}
+
+.card.disabled::after {
+    border-color: var(--is-disabled);
+}
+
+.card.disabled .card-body {
+    opacity: .5;
+}
+
+.card.disabled .card-weight-ellipse {
+    background-color: var(--is-disabled);
+}
+
+.card-text-content {
+    margin-top: 17px;
+    margin-left: 48px;
+}
+
+.card-cat-pic {
+    position: absolute;
+    display: block;
+    left: -30px;
+    bottom: -90px;
+    object-fit: cover;
+}
+
+.card-weight-ellipse {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    width: 80px;
+    height: 80px;
+    background-color: var(--default-blue);
+    border-radius: 50%;
+    transition: background-color .1s ease-out;
+}
+
+.card-weight {
+    position: absolute;
+    right: 50%;
+    bottom: 50%;
+    transform: translate(50%, 50%);
+    text-align: center;
+    color: #fff;
+    font-family: inherit;
+    line-height: .5;
+    letter-spacing: -1px;
+}
+
+.card-weight {
+    font-size: 42px;
+}
+
+.card-weight-kg {
+    font-size: 21px;
+}
+
+.card-w-undertext {
+    position: relative;
+}
+
+.under-card-kupi {
+    position: absolute;
+    width: 320px;
+    color: #fff;
+    margin: 18px auto 0 auto;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 300;
+}
+
+.under-card-kupi.sold-out,
+.under-card-kupi.default,
+.under-card-kupi.active {
+    display: none;
+}
+
+.under-card-kupi.sold-out.visible,
+.under-card-kupi.default.visible,
+.under-card-kupi.active.visible {
+    display: inline-block;
+}
+
+.under-card-kupi--bold {
+    font-weight: 900;
+}
+
+.card.disabled~.under-card-kupi {
+    color: var(--pechalka);
+}
